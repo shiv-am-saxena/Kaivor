@@ -18,5 +18,22 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
+    rules: {
+      "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+      "no-console": ["warn", { "allow": ["warn", "error"] }],
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "max-depth": ["warn", { "max": 4 }],
+      "max-lines": ["warn", { "max": 300, "skipBlankLines": true, "skipComments": true }],
+      "max-lines-per-function": ["warn", { "max": 50, "skipBlankLines": true, "skipComments": true }],
+      "max-nested-callbacks": ["warn", { "max": 3 }],
+      "max-params": ["warn", { "max": 4 }],
+      "max-statements": ["warn", { "max": 20 }],
+      "complexity": ["warn", { "max": 10 }],
+      "no-duplicate-imports": "error",
+      "no-var": "error",
+      "prefer-const": "error",
+      "eqeqeq": ["error", "always"],
+    }
   },
 ])
