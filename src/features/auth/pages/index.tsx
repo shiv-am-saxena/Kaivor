@@ -243,46 +243,6 @@ export const AuthPage: React.FC = () => {
             </p>
           </div>
 
-          {/* Account Role Selector for Sign Up */}
-          {mode === 'signup' && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="mb-6"
-            >
-              <label className="text-xs font-mono uppercase text-neutral-400 tracking-wider block mb-2">
-                I want to join as:
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setRole('customer')}
-                  className={`p-3 rounded-2xl border text-left transition-all ${
-                    role === 'customer'
-                      ? 'border-white bg-white/10 text-white'
-                      : 'border-white/10 bg-black/20 text-neutral-400 hover:border-white/20'
-                  }`}
-                >
-                  <div className="text-xs font-semibold uppercase tracking-wider">Customer</div>
-                  <div className="text-[10px] text-neutral-400 mt-0.5">Explore & purchase luxury products</div>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setRole('seller')}
-                  className={`p-3 rounded-2xl border text-left transition-all ${
-                    role === 'seller'
-                      ? 'border-white bg-white/10 text-white'
-                      : 'border-white/10 bg-black/20 text-neutral-400 hover:border-white/20'
-                  }`}
-                >
-                  <div className="text-xs font-semibold uppercase tracking-wider">Boutique / Partner</div>
-                  <div className="text-[10px] text-neutral-400 mt-0.5">Showcase & sell luxury collections</div>
-                </button>
-              </div>
-            </motion.div>
-          )}
-
           {/* Social Authentication Buttons */}
           <div className="grid grid-cols-2 gap-3 mb-6">
             <button
