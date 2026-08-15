@@ -2,6 +2,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import userSlice from "../features/auth/slice/index";
 const safeStorage = (storage as any).default || storage;
 
 const userConfig = {

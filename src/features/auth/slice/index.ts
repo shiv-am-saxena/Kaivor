@@ -1,10 +1,15 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface UserState {
-	name: string;
+	fullName: string;
 	email: string;
-	isVerified: boolean;
-	token: string;
+	role:string;
+	phoneNumber:string;
+	googleId:boolean;
+	isVerified:{
+		email:boolean;
+		phone:boolean;
+	};
 }
 
 type initialStateType = {
@@ -15,15 +20,10 @@ type initialStateType = {
 };
 
 const initialState: initialStateType = {
-	user: {
-		name: "",
-		email: "",
-		isVerified: false,
-		token: ""
-	},
+	user: null,
 	isAuthenticated: false,
 	isLoading: false,
-	token: ""
+	token: null
 };
 
 const userSlice = createSlice({
@@ -39,7 +39,7 @@ const userSlice = createSlice({
 		clearUser: (state) => {
 			state.user = null;
 			state.isAuthenticated = false;
-			state.token = "";
+			state.token = null;
 		},
 		setToken: (state, action: PayloadAction<string>) => {
 			state.token = action.payload;
