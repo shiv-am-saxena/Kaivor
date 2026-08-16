@@ -1,9 +1,21 @@
 import { useState, useRef } from "react";
 import { useAppSelector, useAppDispatch } from "../context/hooks";
 import { NavLink } from "react-router-dom";
-import { ShoppingBag, Menu, X, LogOut, User, Heart, Package, Shirt, Sparkles, Handbag } from "lucide-react";
+import {
+	ShoppingBag,
+	Menu,
+	X,
+	LogOut,
+	User,
+	Heart,
+	Package,
+	Shirt,
+	Sparkles,
+	Handbag
+} from "lucide-react";
 import { clearUser } from "../features/auth/slice";
 import { AnimatePresence, motion } from "motion/react";
+import { TextRoll } from "./ui/TextRoll";
 
 const Navbar = () => {
 	const { isAuthenticated, user } = useAppSelector((state) => state.auth);
@@ -35,28 +47,30 @@ const Navbar = () => {
 	return (
 		<>
 			<header className="sticky top-0 z-30 w-full border-b border-neutral-800 bg-black/90 backdrop-blur-md transition-colors">
-				<div className="mx-auto flex h-16 sm:h-20 2xl:h-24 max-w-[2560px] items-center justify-between px-4 sm:px-6 md:px-10 lg:px-12 2xl:px-20">
+				<div className="mx-auto flex h-16 max-w-[2560px] items-center justify-between px-4 sm:h-20 sm:px-6 md:px-10 lg:px-12 2xl:h-24 2xl:px-20">
 					{/* Desktop Navigation */}
-					<nav className="hidden items-center gap-6 lg:gap-8 md:flex">
+					<nav className="hidden items-center gap-6 md:flex lg:gap-8">
 						<NavLink to="/new-arrivals" className={navLinkClass}>
-							New Arrivals
+							<TextRoll stagger={false}>New Arrivals</TextRoll>
 						</NavLink>
 						<NavLink
 							to="/sale"
 							className={({ isActive }) =>
-								`text-base lg:text-lg 2xl:text-xl font-medium transition-colors ${
-									isActive ? "text-red-400 font-semibold" : "text-red-500 hover:text-red-400"
+								`text-base font-medium transition-colors lg:text-lg 2xl:text-xl ${
+									isActive
+										? "font-semibold text-red-400"
+										: "text-red-500 hover:text-red-400"
 								}`
 							}
 						>
-							Sale
+							<TextRoll stagger={false}>Sale</TextRoll>
 						</NavLink>
 					</nav>
 
 					{/* Brand Logo */}
 					<NavLink to="/" className="group flex items-center">
-						<h1 className="text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl font-bold tracking-tight text-white transition-colors group-hover:text-neutral-300">
-							Kaivor
+						<h1 className="text-2xl font-bold tracking-tight text-white transition-colors group-hover:text-neutral-300 sm:text-3xl lg:text-4xl 2xl:text-5xl">
+							<TextRoll>Kaivor</TextRoll>
 						</h1>
 					</NavLink>
 
@@ -67,7 +81,7 @@ const Navbar = () => {
 							className="relative p-2 text-neutral-300 transition-colors hover:text-white"
 							aria-label="Shopping Cart"
 						>
-							<ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 2xl:h-7 2xl:w-7 text-white" />
+							<ShoppingBag className="h-5 w-5 text-white sm:h-6 sm:w-6 2xl:h-7 2xl:w-7" />
 						</NavLink>
 
 						{!isAuthenticated ? (
@@ -77,14 +91,14 @@ const Navbar = () => {
 									onClick={() => setIsOpen(false)}
 									className="rounded-full border border-white/30 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 sm:text-base 2xl:px-6 2xl:py-2.5 2xl:text-lg"
 								>
-									Sign In
+									<TextRoll stagger={false}>Sign In</TextRoll>
 								</NavLink>
 								<NavLink
 									to="/auth?tab=sign-up"
 									onClick={() => setIsOpen(false)}
 									className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-neutral-200 sm:text-base 2xl:px-6 2xl:py-2.5 2xl:text-lg"
 								>
-									Sign Up
+									<TextRoll stagger={false}>Sign Up</TextRoll>
 								</NavLink>
 							</div>
 						) : null}
@@ -125,12 +139,14 @@ const Navbar = () => {
 							animate={{ x: 0 }}
 							exit={{ x: "100%" }}
 							transition={{ type: "spring", damping: 25, stiffness: 220 }}
-							className="fixed top-0 right-0 z-50 flex h-screen w-full sm:w-[400px] 2xl:w-[460px] flex-col justify-between border-l border-neutral-800 bg-neutral-950 p-5 sm:p-6 2xl:p-8 shadow-2xl text-white"
+							className="fixed top-0 right-0 z-50 flex h-screen w-full flex-col justify-between border-l border-neutral-800 bg-neutral-950 p-5 text-white shadow-2xl sm:w-[400px] sm:p-6 2xl:w-[460px] 2xl:p-8"
 						>
-							<div className="flex flex-col h-full overflow-y-auto">
+							<div className="flex h-full flex-col overflow-y-auto">
 								{/* Sidebar Header */}
-								<div className="flex items-center justify-between border-b pb-4 border-neutral-800">
-									<h2 className="text-xl sm:text-2xl 2xl:text-3xl font-bold text-white">Menu</h2>
+								<div className="flex items-center justify-between border-b border-neutral-800 pb-4">
+									<h2 className="text-xl font-bold text-white sm:text-2xl 2xl:text-3xl">
+										Menu
+									</h2>
 									<button
 										onClick={() => setIsOpen(false)}
 										className="rounded-full p-2 text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
@@ -141,7 +157,7 @@ const Navbar = () => {
 								</div>
 
 								{/* Navigation Links */}
-								<nav className="mt-6 flex flex-col gap-2 flex-grow">
+								<nav className="mt-6 flex grow flex-col gap-2">
 									{isAuthenticated && (
 										<>
 											<NavLink
@@ -150,7 +166,7 @@ const Navbar = () => {
 												className={sidebarNavLinkClass}
 											>
 												<User className="h-5 w-5 text-white" />
-												Profile
+												<TextRoll stagger={false}>Profile</TextRoll>
 											</NavLink>
 											<NavLink
 												to="/orders"
@@ -158,7 +174,7 @@ const Navbar = () => {
 												className={sidebarNavLinkClass}
 											>
 												<Package className="h-5 w-5 text-white" />
-												My Orders
+												<TextRoll stagger={false}>My Orders</TextRoll>
 											</NavLink>
 										</>
 									)}
@@ -169,7 +185,7 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Sparkles className="h-5 w-5 text-white" />
-										New Arrivals
+										<TextRoll stagger={false}>New Arrivals</TextRoll>
 									</NavLink>
 
 									<NavLink
@@ -178,7 +194,7 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Shirt className="h-5 w-5 text-white" />
-										T-shirts Collection
+										<TextRoll stagger={false}>T-shirts Collection</TextRoll>
 									</NavLink>
 
 									<NavLink
@@ -187,7 +203,7 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Sparkles className="h-5 w-5 text-white" />
-										Embroidered Patches
+										<TextRoll stagger={false}>Embroidered Patches</TextRoll>
 									</NavLink>
 
 									<NavLink
@@ -196,7 +212,7 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Shirt className="h-5 w-5 text-white" />
-										Anime Collection
+										<TextRoll stagger={false}>Anime Collection</TextRoll>
 									</NavLink>
 
 									<NavLink
@@ -205,7 +221,7 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Handbag className="h-5 w-5 text-white" />
-										Tote Bags
+										<TextRoll stagger={false}>Tote Bags</TextRoll>
 									</NavLink>
 
 									<NavLink
@@ -214,23 +230,23 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Heart className="h-5 w-5 text-white" />
-										Wishlist
+										<TextRoll stagger={false}>Wishlist</TextRoll>
 									</NavLink>
 								</nav>
 
 								{/* Sidebar Footer / User Account */}
-								<div className="mt-6 border-t pt-6 border-neutral-800">
+								<div className="mt-6 border-t border-neutral-800 pt-6">
 									{isAuthenticated ? (
 										<div className="flex flex-col gap-4">
 											<div className="flex items-center gap-3">
-												<div className="flex h-11 w-11 items-center justify-center rounded-full bg-white font-bold text-black text-lg">
+												<div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-lg font-bold text-black">
 													{avatarInitial}
 												</div>
 												<div className="flex flex-col truncate">
-													<span className="font-semibold text-white truncate">
+													<span className="truncate font-semibold text-white">
 														{user?.fullName || "User"}
 													</span>
-													<span className="text-xs text-neutral-400 truncate">
+													<span className="truncate text-xs text-neutral-400">
 														{user?.email || ""}
 													</span>
 												</div>
@@ -240,7 +256,7 @@ const Navbar = () => {
 												className="flex items-center justify-center gap-2 rounded-xl border border-red-500/80 py-2.5 font-medium text-red-400 transition-colors hover:bg-red-500 hover:text-white"
 											>
 												<LogOut className="h-4 w-4" />
-												Logout
+												<TextRoll>Logout</TextRoll>
 											</button>
 										</div>
 									) : (
