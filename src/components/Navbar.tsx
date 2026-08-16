@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../context/hooks";
 import { NavLink } from "react-router-dom";
 import {
@@ -20,8 +20,41 @@ import { TextRoll } from "./ui/TextRoll";
 const Navbar = () => {
 	const { isAuthenticated, user } = useAppSelector((state) => state.auth);
 	const [isOpen, setIsOpen] = useState(false);
+	const [isVisible, setIsVisible] = useState(true);
 	const menuRef = useRef<HTMLDivElement>(null);
 	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		let lastScrollY = window.scrollY;
+
+		const handleScroll = () => {
+			const currentScrollY = window.scrollY;
+			const windowHeight = window.innerHeight;
+			const documentHeight = document.documentElement.scrollHeight;
+			
+			// Check if scrolled near the bottom (within 50px of bottom)
+			const isAtBottom = currentScrollY + windowHeight >= documentHeight - 50;
+
+			if (currentScrollY <= 10) {
+				// Show navbar when at/near top
+				setIsVisible(true);
+			} else if (isAtBottom) {
+				// Hide navbar when at bottom
+				setIsVisible(false);
+			} else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+				// Hide navbar on scroll down
+				setIsVisible(false);
+			} else if (currentScrollY < lastScrollY) {
+				// Show navbar on scroll up
+				setIsVisible(true);
+			}
+
+			lastScrollY = currentScrollY;
+		};
+
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	const handleLogout = () => {
 		dispatch(clearUser());
@@ -46,7 +79,12 @@ const Navbar = () => {
 
 	return (
 		<>
-			<header className="sticky top-0 z-30 w-full border-b border-neutral-800 bg-black/90 backdrop-blur-md transition-colors">
+			<motion.header
+				initial={{ y: 0 }}
+				animate={{ y: isVisible ? 0 : "-100%" }}
+				transition={{ duration: 0.3, ease: "easeInOut" }}
+				className="sticky top-0 z-30 w-full border-b border-neutral-800 bg-black/90 backdrop-blur-md transition-colors"
+			>
 				<div className="mx-auto flex h-16 max-w-[2560px] items-center justify-between px-4 sm:h-20 sm:px-6 md:px-10 lg:px-12 2xl:h-24 2xl:px-20">
 					{/* Desktop Navigation */}
 					<nav className="hidden items-center gap-6 md:flex lg:gap-8">
@@ -117,7 +155,7 @@ const Navbar = () => {
 						</button>
 					</div>
 				</div>
-			</header>
+			</motion.header>
 
 			{/* Sidebar & Backdrop */}
 			<AnimatePresence>
@@ -139,7 +177,7 @@ const Navbar = () => {
 							animate={{ x: 0 }}
 							exit={{ x: "100%" }}
 							transition={{ type: "spring", damping: 25, stiffness: 220 }}
-							className="fixed top-0 right-0 z-50 flex h-screen w-full flex-col justify-between border-l border-neutral-800 bg-neutral-950 p-5 text-white shadow-2xl sm:w-[400px] sm:p-6 2xl:w-[460px] 2xl:p-8"
+							className="fixed top-0 right-0 z-50 flex h-dvh w-full flex-col justify-between border-l border-neutral-800 bg-neutral-950 p-5 text-white shadow-2xl sm:w-[400px] sm:p-6 2xl:w-[460px] 2xl:p-8"
 						>
 							<div className="flex h-full flex-col overflow-y-auto">
 								{/* Sidebar Header */}
