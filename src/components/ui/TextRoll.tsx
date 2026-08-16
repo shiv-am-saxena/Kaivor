@@ -10,7 +10,7 @@ const TextRoll: React.FC<{
 	className?: string;
 	center?: boolean;
 	stagger?: boolean;
-}> = ({ children, className, center = false, stagger = true}) => {
+}> = ({ children, className, center = false, stagger = false}) => {
 	return (
 		<motion.span
 			initial="initial"

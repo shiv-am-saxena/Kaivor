@@ -4,6 +4,7 @@ import { useAppSelector } from "../../../context/hooks";
 import { Link, Navigate } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
 import { Eye, EyeOff } from "lucide-react";
+import { TextRoll } from "../../../components/ui/TextRoll";
 
 const Auth = (): React.ReactNode => {
 	//login states
@@ -173,7 +174,7 @@ const Auth = (): React.ReactNode => {
 										<span>Remember me</span>
 									</label>
 									<Link
-										to="/forgot-password"
+										to="/auth/forgot-password"
 										className="font-medium underline underline-offset-4 transition-colors hover:text-black dark:hover:text-white"
 									>
 										Forgot password?
@@ -185,7 +186,7 @@ const Auth = (): React.ReactNode => {
 									type="submit"
 									className="mt-2 w-full rounded-full bg-black py-3 text-xs font-semibold tracking-widest text-white uppercase transition-transform active:scale-[0.99] sm:py-3.5 sm:text-sm 2xl:py-4 2xl:text-base dark:bg-white dark:text-black"
 								>
-									Login
+									<TextRoll>Login</TextRoll>
 								</button>
 
 								{/* Switch Mode Prompt */}
@@ -361,7 +362,7 @@ const Auth = (): React.ReactNode => {
 									disabled={!agreeTerms}
 									className="mt-1 w-full rounded-full bg-black py-2.5 text-xs font-semibold tracking-widest text-white uppercase transition-all active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40 sm:py-3 sm:text-sm 2xl:py-4 2xl:text-base dark:bg-white dark:text-black"
 								>
-									Register
+									<TextRoll>Register</TextRoll>
 								</button>
 
 								{/* Switch Mode Prompt */}

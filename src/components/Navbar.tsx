@@ -89,7 +89,7 @@ const Navbar = () => {
 					{/* Desktop Navigation */}
 					<nav className="hidden items-center gap-6 md:flex lg:gap-8">
 						<NavLink to="/new-arrivals" className={navLinkClass}>
-							<TextRoll stagger={false}>New Arrivals</TextRoll>
+							<TextRoll>New Arrivals</TextRoll>
 						</NavLink>
 						<NavLink
 							to="/sale"
@@ -101,14 +101,14 @@ const Navbar = () => {
 								}`
 							}
 						>
-							<TextRoll stagger={false}>Sale</TextRoll>
+							<TextRoll>Sale</TextRoll>
 						</NavLink>
 					</nav>
 
 					{/* Brand Logo */}
 					<NavLink to="/" className="group flex items-center">
 						<h1 className="text-2xl font-bold tracking-tight text-white transition-colors group-hover:text-neutral-300 sm:text-3xl lg:text-4xl 2xl:text-5xl">
-							<TextRoll>Kaivor</TextRoll>
+							<TextRoll stagger>Kaivor</TextRoll>
 						</h1>
 					</NavLink>
 
@@ -129,14 +129,14 @@ const Navbar = () => {
 									onClick={() => setIsOpen(false)}
 									className="rounded-full border border-white/30 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 sm:text-base 2xl:px-6 2xl:py-2.5 2xl:text-lg"
 								>
-									<TextRoll stagger={false}>Sign In</TextRoll>
+									<TextRoll>Sign In</TextRoll>
 								</NavLink>
 								<NavLink
 									to="/auth?tab=sign-up"
 									onClick={() => setIsOpen(false)}
 									className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-neutral-200 sm:text-base 2xl:px-6 2xl:py-2.5 2xl:text-lg"
 								>
-									<TextRoll stagger={false}>Sign Up</TextRoll>
+									<TextRoll>Sign Up</TextRoll>
 								</NavLink>
 							</div>
 						) : null}
@@ -204,7 +204,7 @@ const Navbar = () => {
 												className={sidebarNavLinkClass}
 											>
 												<User className="h-5 w-5 text-white" />
-												<TextRoll stagger={false}>Profile</TextRoll>
+												<TextRoll>Profile</TextRoll>
 											</NavLink>
 											<NavLink
 												to="/orders"
@@ -212,7 +212,7 @@ const Navbar = () => {
 												className={sidebarNavLinkClass}
 											>
 												<Package className="h-5 w-5 text-white" />
-												<TextRoll stagger={false}>My Orders</TextRoll>
+												<TextRoll>My Orders</TextRoll>
 											</NavLink>
 										</>
 									)}
@@ -223,7 +223,7 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Sparkles className="h-5 w-5 text-white" />
-										<TextRoll stagger={false}>New Arrivals</TextRoll>
+										<TextRoll>New Arrivals</TextRoll>
 									</NavLink>
 
 									<NavLink
@@ -232,7 +232,7 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Shirt className="h-5 w-5 text-white" />
-										<TextRoll stagger={false}>T-shirts Collection</TextRoll>
+										<TextRoll>T-shirts Collection</TextRoll>
 									</NavLink>
 
 									<NavLink
@@ -241,7 +241,7 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Sparkles className="h-5 w-5 text-white" />
-										<TextRoll stagger={false}>Embroidered Patches</TextRoll>
+										<TextRoll>Embroidered Patches</TextRoll>
 									</NavLink>
 
 									<NavLink
@@ -250,7 +250,7 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Shirt className="h-5 w-5 text-white" />
-										<TextRoll stagger={false}>Anime Collection</TextRoll>
+										<TextRoll>Anime Collection</TextRoll>
 									</NavLink>
 
 									<NavLink
@@ -259,7 +259,7 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Handbag className="h-5 w-5 text-white" />
-										<TextRoll stagger={false}>Tote Bags</TextRoll>
+										<TextRoll>Tote Bags</TextRoll>
 									</NavLink>
 
 									<NavLink
@@ -268,7 +268,7 @@ const Navbar = () => {
 										className={sidebarNavLinkClass}
 									>
 										<Heart className="h-5 w-5 text-white" />
-										<TextRoll stagger={false}>Wishlist</TextRoll>
+										<TextRoll>Wishlist</TextRoll>
 									</NavLink>
 								</nav>
 
