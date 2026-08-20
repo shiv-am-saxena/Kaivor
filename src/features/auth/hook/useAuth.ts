@@ -87,9 +87,6 @@ const useAuth = () => {
 		return res;
 	};
 
-	// Todo: handle oauth callback
-	// const handleOauthCallback = async()=>{
-	// }
 
 	const handleFetchUser = async (token: string) => {
 		try {

@@ -217,7 +217,7 @@ const Auth: React.FC = () => {
 							>
 								{/* Google Social Button */}
 								<a
-									href={`${import.meta.env.VITE_API_URL}/auth/google`}
+									href={`${import.meta.env.VITE_API_URL}/auth/register/google`}
 									className="group flex w-full items-center justify-center gap-3 rounded-full border border-black/20 bg-black/5 px-4 py-2.5 text-xs font-semibold text-black transition-all hover:bg-black hover:text-white sm:py-3 sm:text-sm 2xl:py-4 2xl:text-base dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white dark:hover:text-black"
 								>
 									<svg
