@@ -3,6 +3,7 @@ import App from "../app/App";
 import Auth from "../features/auth/pages/index";
 import ForgotPassword from "../features/auth/pages/ForgetPassword";
 import ResetPassword from "../features/auth/pages/ResetPassword";
+import PrivacyPolicy from "../app/Footer-Links/PrivacyPolicy";
 const AppRouter = () => {
 	return (
 		<Routes>
@@ -10,6 +11,7 @@ const AppRouter = () => {
 			<Route path="/auth" element={<Auth />} />
 			<Route path="/auth/forgot-password" element={<ForgotPassword />} />
 			<Route path="/auth/reset-password" element={<ResetPassword />} />
+			<Route path="/privacy" element={<PrivacyPolicy />} />
 		</Routes>
 	);
 };

@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Eye, EyeOff } from "lucide-react";
 import { TextRoll } from "../../../components/ui/TextRoll";
 
-const Auth = (): React.ReactNode => {
+const Auth: React.FC = () => {
 	//login states
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");

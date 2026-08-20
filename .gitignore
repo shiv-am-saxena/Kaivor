@@ -25,3 +25,4 @@ dist-ssr
 .env
 docker-compose.yml
 .pnpm-store/v11/index.db
+*.png

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
-import { ArrowLeft, Lock, Eye, EyeOff } from "lucide-react";
+import { Lock, Eye, EyeOff } from "lucide-react";
 import useAuth from "../hook/useAuth";
 import appToast from "../../../components/toast";
 import { TextRoll } from "../../../components/ui/TextRoll";
 
-const ResetPassword = (): React.ReactNode => {
+const ResetPassword: React.FC = () => {
 	const [password, setPassword] = useState("");
 	const [cnfPassword, setCnfPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);

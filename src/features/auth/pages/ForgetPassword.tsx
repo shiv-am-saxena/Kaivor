@@ -4,8 +4,9 @@ import { motion } from "motion/react";
 import { ArrowLeft, KeyRound } from "lucide-react";
 import useAuth from "../hook/useAuth";
 import appToast from "../../../components/toast";
+import { TextRoll } from "../../../components/ui/TextRoll";
 
-const ForgotPassword = (): React.ReactNode => {
+const ForgotPassword: React.FC = () => {
 	const [email, setEmail] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSubmitted, setIsSubmitted] = useState(false);
@@ -86,11 +87,13 @@ const ForgotPassword = (): React.ReactNode => {
 							disabled={isLoading}
 							className="w-full rounded-full bg-black py-3 text-xs font-semibold tracking-widest text-white uppercase transition-transform active:scale-[0.99] disabled:opacity-50 sm:py-3.5 sm:text-sm 2xl:py-4 2xl:text-base dark:bg-white dark:text-black"
 						>
-							{isLoading
-								? "Sending Link..."
-								: isSubmitted
-								? "Resend Reset Link"
-								: "Send Reset Link"}
+							<TextRoll>
+								{isLoading
+									? "Sending Link..."
+									: isSubmitted
+									? "Resend Reset Link"
+									: "Send Reset Link"}
+							</TextRoll>
 						</button>
 
 						{/* Back to Login Link */}
