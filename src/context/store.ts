@@ -10,7 +10,7 @@ const userConfig = {
 	storage: safeStorage
 };
 
-const userReducer = persistReducer(userConfig, userSlice);
+const userReducer = persistReducer<ReturnType<typeof userSlice>>(userConfig, userSlice);
 
 
 const store = configureStore({

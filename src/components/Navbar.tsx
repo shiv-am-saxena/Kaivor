@@ -16,6 +16,8 @@ import {
 import { clearUser } from "../features/auth/slice";
 import { AnimatePresence, motion } from "motion/react";
 import { TextRoll } from "./ui/TextRoll";
+import useAuth from "../features/auth/hook/useAuth";
+import appToast from "./toast";
 
 const Navbar = () => {
 	const { isAuthenticated, user } = useAppSelector((state) => state.auth);
@@ -23,7 +25,7 @@ const Navbar = () => {
 	const [isVisible, setIsVisible] = useState(true);
 	const menuRef = useRef<HTMLDivElement>(null);
 	const dispatch = useAppDispatch();
-
+	const { handleLogout } = useAuth();
 	useEffect(() => {
 		let lastScrollY = window.scrollY;
 
@@ -31,7 +33,7 @@ const Navbar = () => {
 			const currentScrollY = window.scrollY;
 			const windowHeight = window.innerHeight;
 			const documentHeight = document.documentElement.scrollHeight;
-			
+
 			// Check if scrolled near the bottom (within 50px of bottom)
 			const isAtBottom = currentScrollY + windowHeight >= documentHeight - 50;
 
@@ -56,9 +58,16 @@ const Navbar = () => {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
-	const handleLogout = () => {
-		dispatch(clearUser());
-		setIsOpen(false);
+	const handleUserLogout = async() => {
+		try {
+			await handleLogout();
+			appToast.success("Logged Out");
+		} catch (error) {
+			console.error("API Failed", error);
+		} finally {
+			dispatch(clearUser());
+			setIsOpen(false);
+		}
 	};
 
 	const avatarInitial = user?.fullName?.[0]?.toUpperCase() || "U";
@@ -177,7 +186,7 @@ const Navbar = () => {
 							animate={{ x: 0 }}
 							exit={{ x: "100%" }}
 							transition={{ type: "spring", damping: 25, stiffness: 220 }}
-							className="fixed top-0 right-0 z-50 flex h-dvh w-full flex-col justify-between border-l border-neutral-800 bg-neutral-950 p-5 text-white shadow-2xl sm:w-[400px] sm:p-6 2xl:w-[460px] 2xl:p-8"
+							className="fixed top-0 right-0 z-50 flex h-dvh w-full flex-col justify-between border-l border-neutral-800 bg-neutral-950 p-5 text-white shadow-2xl sm:w-100 sm:p-6 2xl:w-115 2xl:p-8"
 						>
 							<div className="flex h-full flex-col overflow-y-auto">
 								{/* Sidebar Header */}
@@ -290,7 +299,7 @@ const Navbar = () => {
 												</div>
 											</div>
 											<button
-												onClick={handleLogout}
+												onClick={handleUserLogout}
 												className="flex items-center justify-center gap-2 rounded-xl border border-red-500/80 py-2.5 font-medium text-red-400 transition-colors hover:bg-red-500 hover:text-white"
 											>
 												<LogOut className="h-4 w-4" />

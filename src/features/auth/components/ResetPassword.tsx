@@ -38,6 +38,7 @@ const ResetPassword: React.FC = () => {
 			appToast.success("Password reset successfully");
 			navigate("/auth");
 		} catch (error) {
+			console.error("Failed to reset password.", error)
 			appToast.error("Failed to reset password. Link may be expired.");
 		} finally {
 			setIsLoading(false);
