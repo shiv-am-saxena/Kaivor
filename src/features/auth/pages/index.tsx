@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import useAuth from "../hook/useAuth";
 import { useAppSelector } from "../../../context/hooks";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
 import { Eye, EyeOff } from "lucide-react";
 import { TextRoll } from "../../../components/ui/TextRoll";
 
 const Auth: React.FC = () => {
+	const [searchParams ] = useSearchParams();
+	const tab = searchParams.get("tab") || "login"
 	//login states
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -18,10 +20,11 @@ const Auth: React.FC = () => {
 	const [agreeTerms, setAgreeTerms] = useState(false);
 
 	const { handleRegister, handleLogin } = useAuth();
-	const { isAuthenticated } = useAppSelector((state) => state.auth);
-	const [mode, setMode] = useState<"login" | "register">("login");
+	const { isAuthenticated, user } = useAppSelector((state) => state.auth);
+	const [mode, setMode] = useState<"login" | "register">(tab as "login" | "register");
 
 	if (isAuthenticated) {
+		if(user?.role === "admin") return <Navigate to="/admin" replace />;
 		return <Navigate to="/" replace />;
 	}
 	return (

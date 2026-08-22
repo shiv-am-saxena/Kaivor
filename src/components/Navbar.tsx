@@ -141,7 +141,7 @@ const Navbar = () => {
 									<TextRoll>Sign In</TextRoll>
 								</NavLink>
 								<NavLink
-									to="/auth?tab=sign-up"
+									to="/auth?tab=register"
 									onClick={() => setIsOpen(false)}
 									className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-neutral-200 sm:text-base 2xl:px-6 2xl:py-2.5 2xl:text-lg"
 								>
