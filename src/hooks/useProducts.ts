@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { useAppDispatch } from "../context/hooks";
-import { appendProducts, setCurrentPage, setTotalProducts } from "../context/slices/products.slice";
+import { setCurrentPage, setProducts, setTotalProducts } from "../context/slices/products.slice";
 import { axiosInstance } from "../utils/axios";
 import appToast from "../components/toast";
 import type IProductAdmin from "../types/products";
@@ -47,11 +47,9 @@ const useProducts = () => {
 		try {
 			const response = await axiosInstance.get(`/products?page=${page}`);
 			const res = await response.data;
-			dispatch(
-				appendProducts(res.data),
-				setTotalProducts(res.pagination.totalProducts),
-				setCurrentPage(res.pagination.currentPage)
-			);
+			dispatch(setProducts(res.data.products));
+			dispatch(setTotalProducts(res.data.pagination.totalProducts));
+			dispatch(setCurrentPage(res.data.pagination.currentPage));
 		} catch (error) {
 			if (error instanceof AxiosError) {
 				appToast.error(error.response?.data?.message || "Failed to fetch products");
@@ -90,13 +88,11 @@ const useProducts = () => {
 
 	const updateProduct = async (productId: string, productData: IProductAdmin) => {
 		try {
-			const response = await axiosInstance.put(`/admin/products/${productId}`, productData,
-				{
-					headers: {
-						"Content-Type": "multipart/form-data"
-					}
+			const response = await axiosInstance.put(`/admin/products/${productId}`, productData, {
+				headers: {
+					"Content-Type": "multipart/form-data"
 				}
-			);
+			});
 			const res = await response.data;
 			appToast.success(res.message || "Product updated successfully");
 			return res.data;
@@ -134,13 +130,117 @@ const useProducts = () => {
 		}
 	};
 
+	const addVariantToProduct = async (productId: string, variantData: FormData) => {
+		try {
+			const response = await axiosInstance.post(
+				`/admin/products/${productId}/variant/add`,
+				variantData,
+				{
+					headers: {
+						"Content-Type": "multipart/form-data"
+					}
+				}
+			);
+			const res = await response.data;
+			appToast.success(res.message || "Variant added successfully");
+			return res.data;
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				appToast.error(error.response?.data?.message || "Failed to add variant");
+			}
+		}
+	};
+
+	const handleBulkDeleteProducts = async (productIds: string[]) => {
+		try {
+			const response = await axiosInstance.delete("/admin/products/bulk-delete", {
+				data: { productIds }
+			});
+			const res = await response.data;
+			appToast.success(res.message || "Products deleted successfully");
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				appToast.error(error.response?.data?.message || "Failed to delete products");
+			}
+		}
+	};
+
+	const handleBulkStatusUpdate = async (productIds: string[], status: boolean) => {
+		try {
+			const response = await axiosInstance.put("/admin/products/bulk-status-update", {
+				productIds,
+				status
+			});
+			const res = await response.data;
+			appToast.success(res.message || "Products status updated successfully");
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				appToast.error(error.response?.data?.message || "Failed to update products status");
+			}
+		}
+	};
+
+	const handleBulkStockUpdate = async (productIds: string[], inStock: boolean) => {
+		try {
+			const response = await axiosInstance.put("/admin/products/bulk-stock-update", {
+				productIds,
+				inStock
+			});
+			const res = await response.data;
+			appToast.success(res.message || "Products stock updated successfully");
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				appToast.error(error.response?.data?.message || "Failed to update products stock");
+			}
+		}
+	};
+
+	const handleBulkDiscountUpdate = async (productIds: string[], discount: number) => {
+		try {
+			const response = await axiosInstance.put("/admin/products/bulk-discount-update", {
+				productIds,
+				discount
+			});
+			const res = await response.data;
+			appToast.success(res.message || "Products discount updated successfully");
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				appToast.error(
+					error.response?.data?.message || "Failed to update products discount"
+				);
+			}
+		}
+	};
+
+	const deleteVariantFromProduct = async (productId: string, variantId: string) => {
+		try {
+			const response = await axiosInstance.delete(
+				`/admin/products/${productId}/variant/${variantId}`
+			);
+			const res = await response.data;
+			appToast.success(res.message || "Variant deleted successfully");
+			return res.data;
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				appToast.error(error.response?.data?.message || "Failed to delete variant");
+			}
+		}
+	};
+
 	return {
 		fetchProducts,
 		addNewProduct,
 		deleteProduct,
 		updateProduct,
 		getProduct,
-		getProductsBySearch
+		getProductsBySearch,
+		addVariantToProduct,
+		deleteVariantFromProduct,
+		handleBulkDeleteProducts,
+		handleBulkStatusUpdate,
+		handleBulkStockUpdate,
+		updateBulkStock: handleBulkStockUpdate,
+		handleBulkDiscountUpdate
 	};
 };
 

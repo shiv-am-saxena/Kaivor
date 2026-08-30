@@ -12,9 +12,13 @@ import {
     UserCheck,
     PlusCircle,
     ListFilter,
-    Home
+    Home,
+    LogOut,
+    User
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useAppSelector } from '../../../context/hooks';
+import useAuth from '../../auth/hook/useAuth';
 
 interface SubLink {
     label: string;
@@ -64,10 +68,17 @@ const navItems: NavItem[] = [
             { label: "All Orders", href: "/admin/orders", icon: <ListFilter className="w-4 h-4" /> },
             { label: "Add Order", href: "/admin/orders/add", icon: <PlusCircle className="w-4 h-4" /> }
         ]
+    },
+    {
+        label: "Profile",
+        href: "/admin/profile",
+        icon: <User className="w-5 h-5" />
     }
 ];
 
-const SidebarContent = ({ currentPath = '/admin' }: { currentPath?: string }) => {
+const SidebarContent = () => {
+    const user = useAppSelector((state) => state.auth.user);
+    const { handleLogout } = useAuth();
     const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
         Users: false,
         Products: false,
@@ -95,7 +106,6 @@ const SidebarContent = ({ currentPath = '/admin' }: { currentPath?: string }) =>
                 {navItems.map((item) => {
                     const hasSubLinks = Boolean(item.links && item.links.length > 0);
                     const isOpen = openGroups[item.label];
-                    const isDirectActive = item.href === currentPath;
 
                     return (
                         <div key={item.label} className="w-full">
@@ -116,17 +126,19 @@ const SidebarContent = ({ currentPath = '/admin' }: { currentPath?: string }) =>
                                     </motion.div>
                                 </button>
                             ) : (
-                                <Link
+                                <NavLink
                                     to={item.href || '#'}
-                                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                                        isDirectActive
+                                    end
+                                    className={({ isActive }) =>
+                                        `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive
                                             ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
                                             : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900'
-                                    }`}
+                                        }`
+                                    }
                                 >
                                     {item.icon}
                                     <span>{item.label}</span>
-                                </Link>
+                                </NavLink>
                             )}
 
                             {/* Submenu Accordion */}
@@ -140,23 +152,22 @@ const SidebarContent = ({ currentPath = '/admin' }: { currentPath?: string }) =>
                                             transition={{ duration: 0.25, ease: 'easeInOut' }}
                                             className="overflow-hidden pl-7 space-y-1 mt-1"
                                         >
-                                            {item.links?.map((subItem) => {
-                                                const isSubActive = subItem.href === currentPath;
-                                                return (
-                                                    <Link
-                                                        key={subItem.href}
-                                                        to={subItem.href}
-                                                        className={`flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                                                            isSubActive
-                                                                ? 'bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-900 dark:text-zinc-100'
-                                                                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-900/60'
-                                                        }`}
-                                                    >
-                                                        {subItem.icon}
-                                                        <span>{subItem.label}</span>
-                                                    </Link>
-                                                );
-                                            })}
+                                            {item.links?.map((subItem, idx) => (
+                                                <NavLink
+                                                    key={idx}
+                                                    to={subItem.href}
+                                                    end
+                                                    className={({ isActive }) =>
+                                                        `flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive
+                                                            ? 'bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-900 dark:text-zinc-100 font-semibold'
+                                                            : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-900/60'
+                                                        }`
+                                                    }
+                                                >
+                                                    {subItem.icon}
+                                                    <span>{subItem.label}</span>
+                                                </NavLink>
+                                            ))}
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
@@ -164,6 +175,30 @@ const SidebarContent = ({ currentPath = '/admin' }: { currentPath?: string }) =>
                         </div>
                     );
                 })}
+            </div>
+
+            {/* Profile & Logout Section */}
+            <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 space-y-3">
+                <div className="flex items-center gap-3 px-2 py-1">
+                    <div className="w-8 h-8 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-300">
+                        <User className="w-4 h-4" />
+                    </div>
+                    <div className="flex flex-col min-w-0 flex-1">
+                        <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">
+                            {user?.fullName || "Admin User"}
+                        </span>
+                        <span className="text-xs text-zinc-500 dark:text-zinc-400 truncate">
+                            {user?.email || "admin@kaivor.com"}
+                        </span>
+                    </div>
+                </div>
+                <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors"
+                >
+                    <LogOut className="w-4 h-4" />
+                    <span>Logout</span>
+                </button>
             </div>
         </div>
     );

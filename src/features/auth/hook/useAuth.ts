@@ -62,8 +62,8 @@ const useAuth = () => {
 						"Resend Verification Email"
 					);
 				}
-				if(error.response?.data.statusCode === 409){
-					appToast.error(error.response.data.message)
+				if (error.response?.data.statusCode === 409) {
+					appToast.error(error.response.data.message);
 				}
 			}
 		}
@@ -179,7 +179,8 @@ const useAuth = () => {
 		handleResetPassword,
 		handleGenAccessToken,
 		handleDeleteUser,
-		handleEmailVerification
+		handleEmailVerification,
+		handleFetchUser
 	};
 };
 

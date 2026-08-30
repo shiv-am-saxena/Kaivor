@@ -12,6 +12,12 @@ import Admin from "../features/admin";
 import ErrorPage from "../app/error";
 import Supplier from "../features/supplier";
 import Dashboard from "../features/admin/pages/Dashboard";
+import AddUser from "../features/admin/pages/users/AddUser";
+import UpdateRole from "../features/admin/pages/users/UpdateRole";
+import AllProducts from "../features/admin/pages/products";
+import Profile from "../features/profile";
+import AddProducts from "../features/admin/pages/products/AddProducts";
+import ViewUpdateProduct from "../features/admin/pages/products/ViewUpdateProduct";
 
 const AppRouter = () => {
 	useAuth();
@@ -30,17 +36,20 @@ const AppRouter = () => {
 					<Route index element={<Dashboard />} />
 					<Route path="users">
 						<Route index element={<div>Users</div>} />
-						<Route path="add" element={<div>Add User</div>} />
-						<Route path="roles" element={<div>Update User Roles</div>} />
+						<Route path="add" element={<AddUser />} />
+						<Route path="roles" element={<UpdateRole />} />
 					</Route>
 					<Route path="products">
-						<Route index element={<div>Products</div>} />
-						<Route path="add" element={<div>Add Product</div>} />
+						<Route index element={<AllProducts />} />
+						<Route path="add" element={<AddProducts />} />
+						<Route path=":id" element={<ViewUpdateProduct/>} />
 					</Route>
 					<Route path="orders">
 						<Route index element={<div>Orders</div>} />
 						<Route path="add" element={<div>Add Order</div>} />
 					</Route>
+					<Route path="profile" element={<Profile />} />
+					<Route path="*" element={<ErrorPage />} />
 				</Route>
 				<Route path="/supplier" element={<Supplier />} />
 			</Route>

@@ -1,5 +1,6 @@
 export default interface IProductAdmin {
 	_id?: string;
+	status: boolean;
 	title: string;
 	description: string;
 	inStock: boolean;
@@ -30,6 +31,7 @@ export interface IVariant {
 
 export interface IProductUser {
 	_id: string;
+	status: boolean;
 	title: string;
 	description: string;
 	inStock: boolean;
@@ -43,6 +45,7 @@ export interface IProductUser {
 
 export interface IProductSupplier {
 	_id: string;
+	status: boolean;
 	title: string;
 	inStock: boolean;
 	supplierId: string;

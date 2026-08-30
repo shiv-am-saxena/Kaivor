@@ -18,7 +18,7 @@ const refreshAxiosInstance = axios.create({
 });
 
 const canRefresh = (error: AxiosError, config?: RetryableConfig): config is RetryableConfig => {
-	if (error.response?.status !== 401 || !config || config._retry) return false;
+	if (error.response?.status !== 401 && error.response?.status !== 500 || !config || config._retry) return false;
 	return !config.url?.includes("/auth/login");
 };
 
