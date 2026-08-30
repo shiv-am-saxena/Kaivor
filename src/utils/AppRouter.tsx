@@ -9,6 +9,9 @@ import PrivacyPolicy from "../app/Footer-Links/PrivacyPolicy";
 import useAuth from "../features/auth/hook/useAuth";
 import Role from "./Role";
 import Admin from "../features/admin";
+import ErrorPage from "../app/error";
+import Supplier from "../features/supplier";
+import Dashboard from "../features/admin/pages/Dashboard";
 
 const AppRouter = () => {
 	useAuth();
@@ -22,9 +25,26 @@ const AppRouter = () => {
 			<Route path="/auth/forgot-password" element={<ForgotPassword />} />
 			<Route path="/auth/reset-password" element={<ResetPassword />} />
 			<Route path="/privacy" element={<PrivacyPolicy />} />
-			<Route element={<Role/>}>
-				<Route path="/admin" element={<Admin/>}/>
+			<Route element={<Role />}>
+				<Route path="/admin" element={<Admin />} >
+					<Route index element={<Dashboard />} />
+					<Route path="users">
+						<Route index element={<div>Users</div>} />
+						<Route path="add" element={<div>Add User</div>} />
+						<Route path="roles" element={<div>Update User Roles</div>} />
+					</Route>
+					<Route path="products">
+						<Route index element={<div>Products</div>} />
+						<Route path="add" element={<div>Add Product</div>} />
+					</Route>
+					<Route path="orders">
+						<Route index element={<div>Orders</div>} />
+						<Route path="add" element={<div>Add Order</div>} />
+					</Route>
+				</Route>
+				<Route path="/supplier" element={<Supplier />} />
 			</Route>
+			<Route path="*" element={<ErrorPage />} />
 		</Routes>
 	);
 };

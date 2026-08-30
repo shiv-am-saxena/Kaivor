@@ -3,6 +3,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userSlice from "../features/auth/slice/index";
+import productsSlice from "../context/slices/products.slice";
+import cartSlice from "../context/slices/cart.slice";
+import addressBookSlice from "./slices/addressBook.slice";
+
 const safeStorage = (storage as any).default || storage;
 
 const userConfig = {
@@ -16,6 +20,9 @@ const userReducer = persistReducer<ReturnType<typeof userSlice>>(userConfig, use
 const store = configureStore({
 	reducer: {
 		auth: userReducer,
+		products: productsSlice,
+		cart: cartSlice,
+		addressBook: addressBookSlice
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

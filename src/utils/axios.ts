@@ -1,37 +1,52 @@
-import axios, { AxiosHeaders, type InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
+import store from "../context/store";
+import { clearUser } from "../features/auth/slice/index";
+
+interface RetryableConfig extends InternalAxiosRequestConfig {
+	_retry?: boolean;
+}
 
 export const axiosInstance = axios.create({
 	baseURL: import.meta.env.VITE_API_URL,
-    withCredentials: true
+	withCredentials: true
 });
 
-axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-		const token = localStorage.getItem("accessToken");
-
-		if (token) {
-			config.headers = AxiosHeaders.from(config.headers);
-
-			config.headers.set(
-				"Authorization",
-				`Bearer ${token}`,
-			);
-		}
-
-		return config;
-	}, (error) => {
-    return Promise.reject(error);
+// Dedicated instance for token refresh to avoid looping through main interceptors
+const refreshAxiosInstance = axios.create({
+	baseURL: import.meta.env.VITE_API_URL,
+	withCredentials: true
 });
 
+const canRefresh = (error: AxiosError, config?: RetryableConfig): config is RetryableConfig => {
+	if (error.response?.status !== 401 || !config || config._retry) return false;
+	return !config.url?.includes("/auth/login");
+};
+
+const handleRedirectToLogin = () => {
+	store.dispatch(clearUser());
+	if (typeof window !== "undefined" && window.location.pathname !== "/auth") {
+		window.location.href = "/auth?tab=login";
+	}
+};
 
 axiosInstance.interceptors.response.use(
-    (response) => {
-        return response;
-    },
-    (error) => {
-        if (error.response && error.response.status === 401) {
-            // Handle unauthorized error, e.g., redirect to login page
-            console.error("Unauthorized access - redirecting to login.");
-        }
-        return Promise.reject(error);
-    }
+	(response) => response,
+	async (error: AxiosError) => {
+		const originalRequest = error.config as RetryableConfig | undefined;
+
+		if (!canRefresh(error, originalRequest)) {
+			return Promise.reject(error);
+		}
+
+		originalRequest._retry = true;
+
+		try {
+			// Perform token refresh using dedicated instance
+			await refreshAxiosInstance.post("/auth/regen-access-token");
+			return axiosInstance(originalRequest);
+		} catch (refreshError) {
+			handleRedirectToLogin();
+			return Promise.reject(refreshError);
+		}
+	}
 );

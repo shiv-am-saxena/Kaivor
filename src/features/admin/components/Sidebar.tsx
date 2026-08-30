@@ -1,0 +1,220 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import {
+    LayoutDashboard,
+    Users,
+    Package,
+    ShoppingCart,
+    ChevronDown,
+    Menu,
+    X,
+    UserPlus,
+    UserCheck,
+    PlusCircle,
+    ListFilter,
+    Home
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+interface SubLink {
+    label: string;
+    href: string;
+    icon?: React.ReactNode;
+}
+
+interface NavItem {
+    label: string;
+    href?: string;
+    icon: React.ReactNode;
+    links?: SubLink[];
+}
+
+const navItems: NavItem[] = [
+    {
+        label: "Home",
+        href: "/",
+        icon: <Home className="w-5 h-5" />
+    },
+    {
+        label: "Dashboard",
+        href: "/admin",
+        icon: <LayoutDashboard className="w-5 h-5" />
+    },
+    {
+        label: "Users",
+        icon: <Users className="w-5 h-5" />,
+        links: [
+            { label: "All Users", href: "/admin/users", icon: <Users className="w-4 h-4" /> },
+            { label: "Add User", href: "/admin/users/add", icon: <UserPlus className="w-4 h-4" /> },
+            { label: "Update User Roles", href: "/admin/users/roles", icon: <UserCheck className="w-4 h-4" /> }
+        ]
+    },
+    {
+        label: "Products",
+        icon: <Package className="w-5 h-5" />,
+        links: [
+            { label: "All Products", href: "/admin/products", icon: <ListFilter className="w-4 h-4" /> },
+            { label: "Add Product", href: "/admin/products/add", icon: <PlusCircle className="w-4 h-4" /> }
+        ]
+    },
+    {
+        label: "Orders",
+        icon: <ShoppingCart className="w-5 h-5" />,
+        links: [
+            { label: "All Orders", href: "/admin/orders", icon: <ListFilter className="w-4 h-4" /> },
+            { label: "Add Order", href: "/admin/orders/add", icon: <PlusCircle className="w-4 h-4" /> }
+        ]
+    }
+];
+
+const SidebarContent = ({ currentPath = '/admin' }: { currentPath?: string }) => {
+    const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
+        Users: false,
+        Products: false,
+        Orders: false
+    });
+
+    const toggleGroup = (label: string) => {
+        setOpenGroups((prev) => ({ ...prev, [label]: !prev[label] }));
+    };
+
+    return (
+        <div className="flex flex-col h-full bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 border-r border-zinc-200 dark:border-zinc-800">
+            {/* Header */}
+            <div className="flex items-center gap-3 px-6 py-5 border-b border-zinc-200 dark:border-zinc-800">
+                <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-bold text-lg shadow-sm">
+                    K
+                </div>
+                <span className="font-semibold text-lg tracking-tight text-zinc-900 dark:text-zinc-100">
+                    Kaivor Admin
+                </span>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
+                {navItems.map((item) => {
+                    const hasSubLinks = Boolean(item.links && item.links.length > 0);
+                    const isOpen = openGroups[item.label];
+                    const isDirectActive = item.href === currentPath;
+
+                    return (
+                        <div key={item.label} className="w-full">
+                            {hasSubLinks ? (
+                                <button
+                                    onClick={() => toggleGroup(item.label)}
+                                    className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-700 dark:text-zinc-300"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        {item.icon}
+                                        <span>{item.label}</span>
+                                    </div>
+                                    <motion.div
+                                        animate={{ rotate: isOpen ? 180 : 0 }}
+                                        transition={{ duration: 0.2, ease: "easeInOut" }}
+                                    >
+                                        <ChevronDown className="w-4 h-4 opacity-60" />
+                                    </motion.div>
+                                </button>
+                            ) : (
+                                <Link
+                                    to={item.href || '#'}
+                                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                                        isDirectActive
+                                            ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
+                                            : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900'
+                                    }`}
+                                >
+                                    {item.icon}
+                                    <span>{item.label}</span>
+                                </Link>
+                            )}
+
+                            {/* Submenu Accordion */}
+                            {hasSubLinks && (
+                                <AnimatePresence initial={false}>
+                                    {isOpen && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.25, ease: 'easeInOut' }}
+                                            className="overflow-hidden pl-7 space-y-1 mt-1"
+                                        >
+                                            {item.links?.map((subItem) => {
+                                                const isSubActive = subItem.href === currentPath;
+                                                return (
+                                                    <Link
+                                                        key={subItem.href}
+                                                        to={subItem.href}
+                                                        className={`flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                                                            isSubActive
+                                                                ? 'bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-900 dark:text-zinc-100'
+                                                                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-900/60'
+                                                        }`}
+                                                    >
+                                                        {subItem.icon}
+                                                        <span>{subItem.label}</span>
+                                                    </Link>
+                                                );
+                                            })}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
+
+const Sidebar = () => {
+    const [mobileOpen, setMobileOpen] = useState(false);
+
+    return (
+        <>
+            {/* Mobile Toggle Button */}
+            <div className="lg:hidden fixed top-4 right-4 z-50">
+                <button
+                    onClick={() => setMobileOpen(!mobileOpen)}
+                    className="p-2 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 shadow-md focus:outline-none"
+                    aria-label="Toggle menu"
+                >
+                    {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+            </div>
+
+            {/* Mobile Overlay & Drawer */}
+            <AnimatePresence>
+                {mobileOpen && (
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setMobileOpen(false)}
+                            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
+                        />
+                        <motion.aside
+                            initial={{ x: '-100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '-100%' }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            className="fixed inset-y-0 left-0 z-40 w-64 lg:hidden shadow-xl"
+                        >
+                            <SidebarContent />
+                        </motion.aside>
+                    </>
+                )}
+            </AnimatePresence>
+
+            {/* Desktop Fixed/Static Sidebar */}
+            <aside className="hidden lg:block w-64 h-screen sticky top-0 shrink-0">
+                <SidebarContent />
+            </aside>
+        </>
+    );
+};
+
+export default Sidebar;

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../context/hooks";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
 	ShoppingBag,
 	Menu,
@@ -25,6 +25,7 @@ const Navbar = () => {
 	const [isVisible, setIsVisible] = useState(true);
 	const menuRef = useRef<HTMLDivElement>(null);
 	const dispatch = useAppDispatch();
+	const { pathname } = useLocation();
 	const { handleLogout } = useAuth();
 	useEffect(() => {
 		let lastScrollY = window.scrollY;
@@ -58,7 +59,7 @@ const Navbar = () => {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
-	const handleUserLogout = async() => {
+	const handleUserLogout = async () => {
 		try {
 			await handleLogout();
 			appToast.success("Logged Out");
@@ -73,19 +74,19 @@ const Navbar = () => {
 	const avatarInitial = user?.fullName?.[0]?.toUpperCase() || "U";
 
 	const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-		`text-base lg:text-lg 2xl:text-xl font-medium transition-colors ${
-			isActive
-				? "text-white font-semibold"
-				: "text-neutral-300 hover:text-white dark:text-neutral-200 dark:hover:text-white"
+		`text-base lg:text-lg 2xl:text-xl font-medium transition-colors ${isActive
+			? "text-white font-semibold"
+			: "text-neutral-300 hover:text-white dark:text-neutral-200 dark:hover:text-white"
 		}`;
 
 	const sidebarNavLinkClass = ({ isActive }: { isActive: boolean }) =>
-		`flex items-center gap-3 text-base sm:text-lg 2xl:text-xl font-medium transition-all py-2.5 px-3.5 rounded-xl ${
-			isActive
-				? "bg-white/10 text-white font-semibold"
-				: "text-neutral-300 hover:bg-neutral-800 hover:text-white dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white"
+		`flex items-center gap-3 text-base sm:text-lg 2xl:text-xl font-medium transition-all py-2.5 px-3.5 rounded-xl ${isActive
+			? "bg-white/10 text-white font-semibold"
+			: "text-neutral-300 hover:bg-neutral-800 hover:text-white dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white"
 		}`;
-
+	if(pathname.startsWith("/admin") || pathname.startsWith("/supplier")) {
+		return null; // Don't render the Navbar for admin or supplier routes
+	}
 	return (
 		<>
 			<motion.header
@@ -103,10 +104,9 @@ const Navbar = () => {
 						<NavLink
 							to="/sale"
 							className={({ isActive }) =>
-								`text-base font-medium transition-colors lg:text-lg 2xl:text-xl ${
-									isActive
-										? "font-semibold text-red-400"
-										: "text-red-500 hover:text-red-400"
+								`text-base font-medium transition-colors lg:text-lg 2xl:text-xl ${isActive
+									? "font-semibold text-red-400"
+									: "text-red-500 hover:text-red-400"
 								}`
 							}
 						>

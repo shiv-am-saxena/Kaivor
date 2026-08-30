@@ -24,7 +24,8 @@ const Auth: React.FC = () => {
 	const [mode, setMode] = useState<"login" | "register">(tab as "login" | "register");
 
 	if (isAuthenticated) {
-		if(user?.role === "admin") return <Navigate to="/admin" replace />;
+		if (user?.role === "admin") return <Navigate to="/admin" replace />;
+		else if(user?.role === "supplier") return <Navigate to="/supplier" replace />;
 		return <Navigate to="/" replace />;
 	}
 	return (
