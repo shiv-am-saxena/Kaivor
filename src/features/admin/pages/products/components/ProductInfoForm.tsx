@@ -71,7 +71,7 @@ export const ProductInfoForm: React.FC<ProductInfoFormProps> = ({ formData, onCh
 
 				{/* Tags */}
 				<div className="space-y-2">
-					<label className="block text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 flex items-center gap-1">
+					<label className="text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 flex items-center gap-1">
 						<Tag className="w-3.5 h-3.5" />
 						Tags (Comma separated)
 					</label>
@@ -88,7 +88,7 @@ export const ProductInfoForm: React.FC<ProductInfoFormProps> = ({ formData, onCh
 
 				{/* Sizes */}
 				<div className="sm:col-span-2 space-y-2">
-					<label className="block text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 flex items-center gap-1">
+					<label className="text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 flex items-center gap-1">
 						<Layers className="w-3.5 h-3.5" />
 						Sizes (Comma separated)
 					</label>

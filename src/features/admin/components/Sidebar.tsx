@@ -14,7 +14,10 @@ import {
     ListFilter,
     Home,
     LogOut,
-    User
+    User,
+    Tag,
+    Tags,
+    Banknote
 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useAppSelector } from '../../../context/hooks';
@@ -67,6 +70,24 @@ const navItems: NavItem[] = [
         links: [
             { label: "All Orders", href: "/admin/orders", icon: <ListFilter className="w-4 h-4" /> },
             { label: "Add Order", href: "/admin/orders/add", icon: <PlusCircle className="w-4 h-4" /> }
+        ]
+    },
+    {
+        label: "Coupons",
+        icon: <Tags className="w-5 h-5" />,
+        links: [
+            { label: "All Coupons", href: "/admin/coupons", icon: <Tag className="w-4 h-4" /> },
+            { label: "Add Coupon", href: "/admin/coupons/add", icon: <Tag className="w-4 h-4" /> },
+            { label: "Update Coupon", href: "/admin/coupons/update", icon: <Tag className="w-4 h-4" /> },
+            { label: "Custom Coupon", href: "/admin/coupons/custom", icon: <Tag className="w-4 h-4" /> }
+        ]
+    },
+    {
+        label: "Offers",
+        icon: <Banknote className="w-5 h-5" />,
+        links: [
+            { label: "All Offers", href: "/admin/offers", icon: <Banknote className="w-4 h-4" /> },
+            { label: "Add Offer", href: "/admin/offers/add", icon: <Banknote className="w-4 h-4" /> }
         ]
     },
     {
