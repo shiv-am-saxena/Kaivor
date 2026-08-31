@@ -12,7 +12,7 @@ const ForgotPassword: React.FC = () => {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const { handleForgetPassword } = useAuth();
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!email) return;
 
@@ -91,8 +91,8 @@ const ForgotPassword: React.FC = () => {
 								{isLoading
 									? "Sending Link..."
 									: isSubmitted
-									? "Resend Reset Link"
-									: "Send Reset Link"}
+										? "Resend Reset Link"
+										: "Send Reset Link"}
 							</TextRoll>
 						</button>
 

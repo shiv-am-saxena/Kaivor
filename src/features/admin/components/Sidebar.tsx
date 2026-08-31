@@ -17,7 +17,12 @@ import {
     User,
     Tag,
     Tags,
-    Banknote
+    Banknote,
+    Layout,
+    Layers,
+    PanelBottom,
+    Megaphone,
+    Image
 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useAppSelector } from '../../../context/hooks';
@@ -91,6 +96,17 @@ const navItems: NavItem[] = [
         ]
     },
     {
+        label: "UI Layout",
+        icon: <Layout className="w-5 h-5" />,
+        links: [
+            { label: "Home Builder", href: "/admin/ui/home", icon: <Layers className="w-4 h-4" /> },
+            { label: "Navbar Menu", href: "/admin/ui/navbar", icon: <Menu className="w-4 h-4" /> },
+            { label: "Footer Links", href: "/admin/ui/footer", icon: <PanelBottom className="w-4 h-4" /> },
+            { label: "Announcement Bar", href: "/admin/ui/banner", icon: <Megaphone className="w-4 h-4" /> },
+            { label: "Collection Banners", href: "/admin/ui/collections", icon: <Image className="w-4 h-4" /> }
+        ]
+    },
+    {
         label: "Profile",
         href: "/admin/profile",
         icon: <User className="w-5 h-5" />
@@ -123,7 +139,7 @@ const SidebarContent = () => {
             </div>
 
             {/* Navigation Links */}
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
+            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 scrollbar-none">
                 {navItems.map((item) => {
                     const hasSubLinks = Boolean(item.links && item.links.length > 0);
                     const isOpen = openGroups[item.label];

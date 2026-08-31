@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import React, { type RefObject } from 'react';
 import { Upload, X, FileArchive } from 'lucide-react';
 
 interface ProductMediaUploadProps {
@@ -8,14 +8,14 @@ interface ProductMediaUploadProps {
 	isAssetDragOver: boolean;
 	fileInputRef: RefObject<HTMLInputElement | null>;
 	assetFileInputRef: RefObject<HTMLInputElement | null>;
-	onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onAssetChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
+	onImageChange: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+	onAssetChange: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+	onDragOver: (_e: React.DragEvent<HTMLDivElement>) => void;
 	onDragLeave: () => void;
-	onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
-	onAssetDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
+	onDrop: (_e: React.DragEvent<HTMLDivElement>) => void;
+	onAssetDragOver: (_e: React.DragEvent<HTMLDivElement>) => void;
 	onAssetDragLeave: () => void;
-	onAssetDrop: (e: React.DragEvent<HTMLDivElement>) => void;
+	onAssetDrop: (_e: React.DragEvent<HTMLDivElement>) => void;
 	onRemoveImage: () => void;
 	onRemoveAsset: () => void;
 }
@@ -56,8 +56,8 @@ export const ProductMediaUpload: React.FC<ProductMediaUploadProps> = ({
 						onDragLeave={onDragLeave}
 						onDrop={onDrop}
 						className={`relative border-2 border-dashed rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all min-h-44 ${isDragOver
-								? 'border-zinc-900 dark:border-zinc-100 bg-zinc-100 dark:bg-zinc-900'
-								: 'border-zinc-300 dark:border-zinc-800 hover:border-zinc-400'
+							? 'border-zinc-900 dark:border-zinc-100 bg-zinc-100 dark:bg-zinc-900'
+							: 'border-zinc-300 dark:border-zinc-800 hover:border-zinc-400'
 							}`}
 						onClick={() => fileInputRef.current?.click()}
 					>
@@ -107,8 +107,8 @@ export const ProductMediaUpload: React.FC<ProductMediaUploadProps> = ({
 						onDragLeave={onAssetDragLeave}
 						onDrop={onAssetDrop}
 						className={`relative border-2 border-dashed rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all min-h-44 ${isAssetDragOver
-								? 'border-zinc-900 dark:border-zinc-100 bg-zinc-100 dark:bg-zinc-900'
-								: 'border-zinc-300 dark:border-zinc-800 hover:border-zinc-400'
+							? 'border-zinc-900 dark:border-zinc-100 bg-zinc-100 dark:bg-zinc-900'
+							: 'border-zinc-300 dark:border-zinc-800 hover:border-zinc-400'
 							}`}
 						onClick={() => assetFileInputRef.current?.click()}
 					>
