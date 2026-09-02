@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import AppRouter from "../utils/AppRouter.tsx";
 import { Toaster } from "sonner";
 import Navbar from "../components/Navbar.tsx";
-import MouseFollower from "../components/MouseFollower.tsx";
+// import MouseFollower from "../components/MouseFollower.tsx";
 
 createRoot(document.getElementById("root")!).render(
 	<BrowserRouter>
