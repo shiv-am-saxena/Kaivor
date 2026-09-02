@@ -6,7 +6,7 @@ import { clearUser, setUser } from "../slice";
 import appToast from "../../../components/toast";
 const useAuth = () => {
 	const dispatch = useAppDispatch();
-	const { isAuthenticated } = useAppSelector((state) => state.auth);
+	const { isAuthenticated, user } = useAppSelector((state) => state.auth);
 	const handleRegister = async (data: {
 		fullName: string;
 		email: string;
@@ -166,10 +166,10 @@ const useAuth = () => {
 		}
 	}, []);
 	useEffect(() => {
-		if (!isAuthenticated) {
+		if (user === null) {
 			handleFetchUser();
 		}
-	}, [isAuthenticated, handleFetchUser]);
+	}, [isAuthenticated, handleFetchUser, user]);
 	return {
 		handleRegister,
 		handleLogin,
