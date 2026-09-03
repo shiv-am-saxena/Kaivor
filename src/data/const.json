@@ -1,0 +1,214 @@
+{
+	"statusCode": 200,
+	"success": true,
+	"message": "Homepage layout fetched successfully",
+	"data": {
+		"_id": "65f8a123bc45de6789012345",
+		"status": "published",
+		"adminId": "65f8a987bc45de6789012399",
+		"title": "Official Kaivor Storefront Homepage",
+		"createdAt": "2026-09-01T10:00:00.000Z",
+		"updatedAt": "2026-09-03T12:00:00.000Z",
+		"data": {
+			"announcement": {
+				"order": 1,
+				"title": "Exclusive Drop: Limited Edition Anime & Streetwear Oversized Tees Live Now!",
+				"buttonText": "Shop Collection",
+				"buttonLink": "/new-arrivals",
+				"isActive": true,
+				"countDownTimer": "2026-09-10T23:59:59.000Z",
+				"createdAt": "2026-09-01T10:00:00.000Z",
+				"updatedAt": "2026-09-03T12:00:00.000Z"
+			},
+			"carousel": {
+				"order": 2,
+				"isGlobal": true,
+				"autoplay": true,
+				"isActive": true,
+				"createdAt": "2026-09-01T10:00:00.000Z",
+				"updatedAt": "2026-09-03T12:00:00.000Z",
+				"slides": [
+					{
+						"order": 1,
+						"imageUrl": "Homepage/home-banner-2.png",
+						"videoUrl": null,
+						"title": "Cyberpunk Heavyweight Streetwear",
+						"description": "Crafted with 280 GSM French Terry Cotton for an unmatched boxy silhouette.",
+						"buttonText": "Explore Drop",
+						"buttonLink": "/t-shirts",
+						"startDate": "2026-09-01T00:00:00.000Z",
+						"endDate": "2026-09-30T23:59:59.000Z",
+						"isActive": true,
+						"createdAt": "2026-09-01T10:00:00.000Z",
+						"updatedAt": "2026-09-03T12:00:00.000Z"
+					},
+					{
+						"order": 2,
+						"imageUrl": "Homepage/home-banner-1.png",
+						"videoUrl": null,
+						"title": "Autumn Monochrome Anime Edition",
+						"description": "High-definition screen printed artwork inspired by neo-Tokyo aesthetics.",
+						"buttonText": "View Anime Drop",
+						"buttonLink": "/anime-t-shirts",
+						"startDate": "2026-09-01T00:00:00.000Z",
+						"endDate": "2026-10-15T23:59:59.000Z",
+						"isActive": true,
+						"createdAt": "2026-09-01T10:00:00.000Z",
+						"updatedAt": "2026-09-03T12:00:00.000Z"
+					}
+				]
+			},
+			"featuredProduct": {
+				"order": 3,
+				"title": "Trending Drops & Essentials",
+				"products": [
+					"65f8b111bc45de6789012301",
+					"65f8b111bc45de6789012302",
+					"65f8b111bc45de6789012303",
+					"65f8b111bc45de6789012304"
+				],
+				"autoplay": true,
+				"startDate": "2026-09-01T00:00:00.000Z",
+				"endDate": null,
+				"isActive": true,
+				"createdAt": "2026-09-01T10:00:00.000Z",
+				"updatedAt": "2026-09-03T12:00:00.000Z"
+			},
+			"categories": {
+				"order": 4,
+				"categories": [
+					{
+						"imageUrl": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80",
+						"name": "Oversized Graphic Tees",
+						"link": "/oversized-graphic-tees"
+					},
+					{
+						"imageUrl": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80",
+						"name": "Anime Streetwear",
+						"link": "/anime-streetwear"
+					},
+					{
+						"imageUrl": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80",
+						"name": "Hoodies & Sweatshirts",
+						"link": "/hoodies-sweatshirts"
+					},
+					{
+						"imageUrl": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80",
+						"name": "Limited Edition Drops",
+						"link": "/limited-edition-drops"
+					}
+				],
+				"isActive": true,
+				"createdAt": "2026-09-01T10:00:00.000Z",
+				"updatedAt": "2026-09-03T12:00:00.000Z"
+			},
+			"whyWe": {
+				"order": 7,
+				"isActive": true,
+				"title": "Engineered For Perfection",
+				"subtitle": "Why Kaivor stands apart in modern street culture",
+				"pillars": [
+					{
+						"icon": "Sparkles",
+						"tag": "Fabric",
+						"title": "280+ GSM Luxury Cotton",
+						"description": "Pre-shrunk, bio-washed combed cotton engineered to maintain form and drape through countless washes."
+					},
+					{
+						"icon": "Shirt",
+						"tag": "Craft",
+						"title": "Tailored Boxy Silhouette",
+						"description": "Dropped shoulder patterns precision-designed for the modern urban aesthetic."
+					},
+					{
+						"icon": "Shield",
+						"tag": "Quality",
+						"title": "High-Density Screen Printing",
+						"description": "Fade-resistant Japanese plastisol inks that stay vibrant season after season."
+					},
+					{
+						"icon": "Package",
+						"tag": "Eco",
+						"title": "Sustainable & Ethically Made",
+						"description": "100% plastic-free recyclable packaging with certified zero-waste manufacturing."
+					}
+				],
+				"createdAt": "2026-09-01T10:00:00.000Z",
+				"updatedAt": "2026-09-03T12:00:00.000Z"
+			},
+			"editorialProduct": {
+				"order": 8,
+				"isActive": true,
+				"tag": "Signature Showcase",
+				"title": "The Kaivor Phantom Heavyweight Hoodie",
+				"description": "Designed for oversized luxury aesthetics, constructed with double-stitched reinforced seams and custom embroidered iconography.",
+				"imageKey": "homepage/editorial_phantom_hoodie.webp",
+				"productId": "65f8b111bc45de6789012305",
+				"specs": [
+					{ "label": "GSM Weight", "value": "400 GSM Heavyweight Terry" },
+					{ "label": "Fit", "value": "Signature Boxy Relaxed" },
+					{ "label": "Origin", "value": "Ethically Crafted in India" },
+					{ "label": "Details", "value": "Hidden Kangaroo Pocket & Thick Ribbed Cuffs" }
+				],
+				"cta": {
+					"text": "Shop The Phantom Hoodie",
+					"link": "/products/65f8b111bc45de6789012305"
+				},
+				"createdAt": "2026-09-01T10:00:00.000Z",
+				"updatedAt": "2026-09-03T12:00:00.000Z"
+			},
+			"community": {
+				"order": 9,
+				"isActive": true,
+				"title": "Community Spotlight",
+				"subtitle": "Worn on the streets, styled by our global community.",
+				"items": [
+					{
+						"id": 1,
+						"driver": "Alex Rivera",
+						"vehicle": "Tokyo Midnight Runner",
+						"imageKey": "homepage/community_alex.webp",
+						"productWorn": "Cyber Oni Heavyweight Tee",
+						"review": "The texture and drape are unreal. Best oversized fit I have owned."
+					},
+					{
+						"id": 2,
+						"driver": "Maya Tanaka",
+						"vehicle": "Neo Shibuya Cruiser",
+						"imageKey": "homepage/community_maya.webp",
+						"productWorn": "Phantom Kuro Oversized Hoodie",
+						"review": "High quality fabric and stitching. Keeps its structure even after several washes."
+					}
+				],
+				"createdAt": "2026-09-01T10:00:00.000Z",
+				"updatedAt": "2026-09-03T12:00:00.000Z"
+			},
+			"faqs": {
+				"order": 10,
+				"isActive": true,
+				"title": "Frequently Asked Questions",
+				"subtitle": "Everything you need to know about our fits, shipping, and quality.",
+				"faqs": [
+					{
+						"question": "What is the sizing fit like?",
+						"answer": "All our tees and hoodies feature a signature boxy, oversized streetwear fit with dropped shoulders. If you prefer a regular or fitted look, consider sizing down."
+					},
+					{
+						"question": "How long does shipping take?",
+						"answer": "Orders are processed within 24-48 hours and typically delivered within 3-5 business days across India with live tracking updates."
+					},
+					{
+						"question": "What is your return and exchange policy?",
+						"answer": "We offer a hassle-free 7-day return and exchange policy from the date of delivery on all unworn items with original tags intact."
+					},
+					{
+						"question": "How should I care for my oversized graphic tees?",
+						"answer": "We recommend machine washing cold inside out with like colors and line drying to preserve the print quality and cotton structure."
+					}
+				],
+				"createdAt": "2026-09-01T10:00:00.000Z",
+				"updatedAt": "2026-09-03T12:00:00.000Z"
+			}
+		}
+	}
+}

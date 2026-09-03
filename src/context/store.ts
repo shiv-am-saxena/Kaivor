@@ -6,6 +6,7 @@ import userSlice from "../features/auth/slice/index";
 import productsSlice from "../context/slices/products.slice";
 import cartSlice from "../context/slices/cart.slice";
 import addressBookSlice from "./slices/addressBook.slice";
+import homepageSlice from "./slices/homepage.slice";
 
 const safeStorage = (storage as any).default || storage;
 
@@ -22,7 +23,8 @@ const store = configureStore({
 		auth: userReducer,
 		products: productsSlice,
 		cart: cartSlice,
-		addressBook: addressBookSlice
+		addressBook: addressBookSlice,
+		homepage: homepageSlice
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import AppRouter from "../utils/AppRouter.tsx";
 import { Toaster } from "sonner";
 import Navbar from "../components/Navbar.tsx";
+import AnnouncementBar from "../components/homepage/AnnouncementBar.tsx";
 // import MouseFollower from "../components/MouseFollower.tsx";
 
 createRoot(document.getElementById("root")!).render(
@@ -14,6 +15,7 @@ createRoot(document.getElementById("root")!).render(
 		<Provider store={store}>
 			<StrictMode>
 				<>
+					<AnnouncementBar />
 					<Navbar />
 					<AppRouter />
 					<Toaster position="top-right" richColors closeButton duration={5000} />
