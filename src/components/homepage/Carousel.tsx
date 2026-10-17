@@ -301,7 +301,12 @@ const Carousel: React.FC = () => {
         return null;
     }
     return (
-        <section className="relative w-full h-[85vh] md:h-[85vh] lg:h-[85vh] xl:h-[85vh] max-h-230 min-h-115 overflow-hidden bg-black text-white select-none"
+        // <section className="relative w-full h-[85vh] md:h-[85vh] lg:h-[85vh] xl:h-[85vh] max-h-230 min-h-115 overflow-hidden bg-black text-white select-none"
+        //     aria-label="Featured Carousel"
+        //     onMouseEnter={() => setIsPaused(true)}
+        //     onMouseLeave={() => setIsPaused(false)}
+        // >
+        <section className="relative w-full h-fit overflow-hidden bg-black text-white select-none"
             aria-label="Featured Carousel"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
@@ -325,6 +330,33 @@ const Carousel: React.FC = () => {
                         />
                     </motion.div>
                 </AnimatePresence>
+                {/* Navigation Buttons */}
+
+                <div className="absolute top-1/2 left-0 transform -translate-y-1/2 flex items-center justify-between w-full px-4 z-20">
+                    <button
+                        onClick={prevSlide}
+                        aria-label="Previous slide"
+                        className="p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors cursor-pointer hover:text-orange-500"
+                    >
+                        <ChevronLeft className="w-8 h-8" />
+                    </button>
+                    <button
+                        onClick={nextSlide}
+                        aria-label="Next slide"
+                        className="p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors cursor-pointer hover:text-orange-500"
+                    >
+                        <ChevronRight className="w-8 h-8" />
+                    </button>
+                </div>
+
+                {/* Number of Slides */}
+                <div className="absolute bottom-5 right-5 sm:bottom-8 sm:right-8 md:bottom-10 md:right-12 z-30 flex items-center gap-3 sm:gap-4 bg-black/45 dark:bg-black/60 backdrop-blur-md px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full border border-white/10 shadow-lg pointer-events-auto">
+                    <span className="font-mono text-xs sm:text-sm font-semibold text-neutral-300 tabular-nums">
+                        0{currentIndex + 1}
+                        <span className="text-neutral-500 mx-1">/</span>
+                        0{totalSlides}
+                    </span>
+                </div>
                 {/* // Bar-Styled-Pagination & Controls at Bottom Right Corner (Always Visible) */}
                 <motion.div
                     key={`${currentIndex}-${isPaused}`}
