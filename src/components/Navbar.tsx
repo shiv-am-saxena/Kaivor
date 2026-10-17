@@ -18,10 +18,11 @@ import { AnimatePresence, motion } from "motion/react";
 import { TextRoll } from "./ui/TextRoll";
 import useAuth from "../features/auth/hook/useAuth";
 import appToast from "./toast";
+import AnnouncementBar from "./homepage/AnnouncementBar";
 
 const computeNavbarVisibility = (currentY: number, prevY: number) => {
-	const isAtTop = currentY <= 10;
-	const isNearBottom = currentY + window.innerHeight >= document.documentElement.scrollHeight - 50;
+	const isAtTop = currentY <= 50;
+	const isNearBottom = currentY + window.innerHeight >= document.documentElement.scrollHeight - 100;
 
 	if (isAtTop || currentY < prevY) return true;
 	if (isNearBottom || (currentY > prevY && currentY > 100)) return false;
@@ -271,6 +272,7 @@ const Navbar = () => {
 				transition={{ duration: 0.3, ease: "easeInOut" }}
 				className="sticky top-0 z-30 w-full border-b border-neutral-200 bg-white/90 backdrop-blur-md transition-colors dark:border-neutral-800 dark:bg-black/90"
 			>
+				<AnnouncementBar />
 				<div className="mx-auto flex h-16 max-w-[2560px] items-center justify-between px-4 sm:h-20 sm:px-6 md:px-10 lg:px-12 2xl:h-24 2xl:px-20">
 					<nav className="hidden items-center gap-6 md:flex lg:gap-8">
 						<NavLink to="/new-arrivals" className={navLinkClass}>

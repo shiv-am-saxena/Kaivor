@@ -85,7 +85,7 @@ const AnnouncementBar: React.FC = () => {
     return (
         <aside
             aria-label="Announcement"
-            className="w-full relative z-40 bg-neutral-50/95 dark:bg-neutral-950 border-b border-neutral-200/90 dark:border-neutral-800/90 text-neutral-900 dark:text-white py-2 px-3 sm:px-6 transition-colors shadow-xs"
+            className="w-full relative z-40 bg-neutral-50/95 dark:bg-neutral-950 border-b border-neutral-200/90 dark:border-neutral-800/90 text-neutral-900 dark:text-white py-2 px-3 sm:px-6 transition-colors shadow-xs hidden md:block backdrop-blur-sm"
         >
             <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-2.5">
                 {/* Left / Center: Announcement Title with Fire Icon */}
@@ -101,7 +101,7 @@ const AnnouncementBar: React.FC = () => {
                 {/* Right: Timer & Action Area */}
                 <div className="flex items-center gap-3.5 mx-auto md:mx-0">
                     {timeLeft && !timeLeft.isExpired && (
-                        <div className="flex items-center gap-1 sm:gap-1.5 bg-white/90 dark:bg-black/40 border border-neutral-200 dark:border-neutral-800 px-2.5 py-1 rounded-xl backdrop-blur-md shadow-xs dark:shadow-none">
+                        <div className="hidden lg:flex items-center gap-1 sm:gap-1.5 bg-white/90 dark:bg-black/40 border border-neutral-200 dark:border-neutral-800 px-2.5 py-1 rounded-xl backdrop-blur-md shadow-xs dark:shadow-none">
                             {timeLeft.days > 0 && (
                                 <>
                                     <FlipBlock value={pad(timeLeft.days)} label="Days" />
