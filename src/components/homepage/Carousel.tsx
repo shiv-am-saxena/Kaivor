@@ -52,7 +52,7 @@ const Carousel: React.FC = () => {
 
     useEffect(() => {
         const updateOrientation = () => {
-            setOrientation(window.innerWidth > window.innerHeight ? 'landscape' : 'portrait');
+            setOrientation(window.innerWidth > 640 ? 'landscape' : 'portrait');
         };
 
         updateOrientation();
@@ -100,11 +100,6 @@ const Carousel: React.FC = () => {
         return null;
     }
     return (
-        // <section className="relative w-full h-[85vh] md:h-[85vh] lg:h-[85vh] xl:h-[85vh] max-h-230 min-h-115 overflow-hidden bg-black text-white select-none"
-        //     aria-label="Featured Carousel"
-        //     onMouseEnter={() => setIsPaused(true)}
-        //     onMouseLeave={() => setIsPaused(false)}
-        // >
         <section className="relative w-full h-fit overflow-hidden bg-black text-white select-none"
             aria-label="Featured Carousel"
             onMouseEnter={() => setIsPaused(true)}
@@ -120,7 +115,7 @@ const Carousel: React.FC = () => {
                         initial="initial"
                         animate="animate"
                         exit="exit"
-                        className={`w-full h-full flex items-center justify-center transition-opacity duration-1000 opacity-100`}
+                        className={`w-full h-full aspect-3/4 sm:aspect-auto flex items-center justify-center transition-opacity duration-1000 opacity-100`}
                     >
                         <img
                             src={genSrc(slides[currentIndex].imageUrl as string)}
