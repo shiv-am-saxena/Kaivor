@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { AxiosError } from "axios";
 import { useAppDispatch } from "../context/hooks";
 import { setCurrentPage, setProducts, setTotalProducts } from "../context/slices/products.slice";
@@ -103,7 +104,7 @@ const useProducts = () => {
 		}
 	};
 
-	const getProduct = async (productId: string) => {
+	const getProduct = useCallback(async (productId: string) => {
 		try {
 			const response = await axiosInstance.get(`/products/${productId}`);
 			const res = await response.data;
@@ -113,7 +114,7 @@ const useProducts = () => {
 				appToast.error(error.response?.data?.message || "Failed to fetch product");
 			}
 		}
-	};
+	}, []);
 
 	const getProductsBySearch = async (options: string | SearchOptions, page: number = 1) => {
 		try {

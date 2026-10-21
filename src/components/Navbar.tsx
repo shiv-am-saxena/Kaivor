@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../context/hooks";
 import { NavLink, useLocation } from "react-router-dom";
 import {
-	ShoppingBag,
 	Menu,
 	X,
 	LogOut,
@@ -11,7 +10,8 @@ import {
 	Package,
 	Shirt,
 	Sparkles,
-	Handbag
+	Handbag,
+	ShoppingCart
 } from "lucide-react";
 import { clearUser } from "../features/auth/slice";
 import { AnimatePresence, motion } from "motion/react";
@@ -304,7 +304,7 @@ const Navbar = () => {
 							className="relative p-2 text-neutral-700 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white"
 							aria-label="Shopping Cart"
 						>
-							<ShoppingBag className="h-5 w-5 text-neutral-900 dark:text-white sm:h-6 sm:w-6 2xl:h-7 2xl:w-7" />
+							<ShoppingCart className="h-5 w-5 text-neutral-900 dark:text-white sm:h-6 sm:w-6 2xl:h-7 2xl:w-7" />
 						</NavLink>
 
 						{!isAuthenticated && (
